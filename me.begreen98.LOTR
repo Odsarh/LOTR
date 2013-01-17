@@ -60,6 +60,7 @@ public class LOTR extends JavaPlugin{
 							.getKeys(false)) {
 						if(args[0].equalsIgnoreCase(s)){
 							player.getInventory().clear();
+							player.sendMessage(ChatColor.DARK_GRAY +"You have been made the " + ChatColor.AQUA + s + ChatColor.DARK_GRAY + " class");
 							try{
 								String Items = getConfig().getString(
 										"Kits." + s + ".Items");
@@ -72,11 +73,13 @@ public class LOTR extends JavaPlugin{
 											Integer.valueOf(itemAmounts[0]),
 											Integer.valueOf(itemAmounts[0]));
 									player.getInventory().addItem(item);
+									
 								
 								}
 								player.updateInventory();
 							}catch(Exception e) {
 								e.printStackTrace();
+								
 							}
 						}
 					}
