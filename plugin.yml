@@ -1,0 +1,10 @@
+name: Lord Of The Rings Kits
+main: me.begreen98.LOTR.LOTR
+version: 1.0
+description: >
+            Lord Of The Rings Kits
+commands:
+   class:
+      description: Sets you to a class.
+      permission: LOTR.class
+      permission-message: You don't have permission to become class's!
