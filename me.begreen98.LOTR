@@ -60,10 +60,61 @@ public class LOTR extends JavaPlugin{
 							.getKeys(false)) {
 						if(args[0].equalsIgnoreCase(s)){
 							player.getInventory().clear();
-							player.sendMessage(ChatColor.DARK_GRAY +"You have been made the " + ChatColor.AQUA + s + ChatColor.DARK_GRAY + " class");
+							player.sendMessage(ChatColor.DARK_GRAY +
+									"You have been made the " +
+									ChatColor.AQUA + s +
+									ChatColor.DARK_GRAY + " class");
+							
 							try{
 								String Items = getConfig().getString(
 										"Kits." + s + ".Items");
+								
+								String[] indiItems = Items.split(",");
+								
+								for(String s1: indiItems) {
+									String[] itemAmounts = s1.split("-");
+									ItemStack item = new ItemStack(
+											Integer.valueOf(itemAmounts[0]),
+											Integer.valueOf(itemAmounts[1]));
+									player.getInventory().addItem(item);
+									
+								
+								}
+								player.updateInventory();
+							}catch(Exception e) {
+								e.printStackTrace();
+								
+							}
+				}
+					}
+				}
+			}
+		}else if(commandLabel.equalsIgnoreCase("DClass")){
+			if(sender instanceof Player) {
+				Player player = (Player) sender;
+				if(args.length == 0){
+					String[] dclasses = getConfig().getString("DonatorKits.DonatorNames")
+							.split(",");
+					for(String dclasse: dclasses) {
+						if(dclasse != null){
+							player.sendMessage("[" + ChatColor.AQUA + dclasse
+									+ ChatColor.WHITE + "] " + ChatColor.GRAY
+									+ ": " + ChatColor.DARK_GRAY
+									+ "Adds you to the " + dclasse + " Class!");
+						}
+					}
+				} else {
+					for(String dclasses : getConfig().getConfigurationSection("DonatorKits")
+							.getKeys(false)) {
+						if(args[0].equalsIgnoreCase(dclasses)){
+							player.getInventory().clear();
+							player.sendMessage(ChatColor.DARK_GRAY +
+									"You have been made the " +
+									ChatColor.AQUA + dclasses +
+									ChatColor.DARK_GRAY + " class");
+							try{
+								String Items = getConfig().getString(
+										"DonatorKits." + dclasses + ".Items");
 								
 								String[] indiItems = Items.split(",");
 								
@@ -93,8 +144,10 @@ public class LOTR extends JavaPlugin{
 			
 			config.set("Kits.Mage.Items", "50-64,278-1,277-4");
 			config.set("Kits.Archer.Items", "64-64,1-1,5-4");
+			config.set("DonatorKits.Commander.Items", "276-1,261-1,320-25,262-32,310-1,311-1,312-1,313-1");
 			
 			config.set("Kits.Names","Mage,Archer");
+			config.set("DonatorKits.DonatorNames","Commander");
 			
 			new File(getDataFolder(), "RESET.FILE").createNewFile();
 		}
