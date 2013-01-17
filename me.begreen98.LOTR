@@ -1,0 +1,85 @@
+package me.begreen98.LOTR;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Logger;
+
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.plugin.java.JavaPlugin;
+
+
+public class LOTR extends JavaPlugin{
+  public final Logger logger = Logger.getLogger("Minecraft");
+	public static LOTR plugin;
+	
+	@Override
+	public void onDisable(){
+		PluginDescriptionFile pdfFile = this.getDescription();
+		this.logger.info(pdfFile.getName() + " has been disabled!");
+	}
+	
+	@Override
+	public void onEnable(){
+		PluginDescriptionFile pdfFile = this.getDescription();
+		try{
+			this.logger.info(pdfFile.getName() + " Version " + pdfFile.getVersion() + " has been enabled!");
+		setupConfig(getConfig());
+		saveConfig();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	public boolean onCommand(CommandSender sender, Command cmd,
+			String commandLabel, String[] args){
+		if(commandLabel.equalsIgnoreCase("class")){
+			if(sender instanceof Player) {
+				Player player = (Player) sender;
+				if(args.length == 0){
+					String[] classes = getConfig().getString("Kits.Names")
+							.split(",");
+					for(String s: classes) {
+						if(s != null){
+							player.sendMessage("[" + ChatColor.AQUA + s
+									+ ChatColor.WHITE + "] " + ChatColor.GRAY
+									+ ": " + ChatColor.DARK_GRAY
+									+ "Adds you to the " + s + " Class!");
+						}
+					}
+				} else {
+					int i = 0;
+					
+					for(String s : getConfig().getConfigurationSection("Kits")
+							.getKeys(false)) {
+						i++;
+						if(args[0].equalsIgnoreCase("s")){
+							player.getInventory().clear();
+							try{
+								String Items = getConfig().getString("Kits)
+							}catch(Exception e) {
+								e.printStackTrace();
+							}
+						}
+					}
+				}
+			}
+		}
+		return false;
+	}
+	private void setupConfig(FileConfiguration config) throws IOException {
+		if(!new File(getDataFolder(), "RESET.FILE").exists()){
+			
+			config.set("Kits.Mage.Items", "50-64,278-1,277-4");
+			config.set("Kits.Archer.Items", "64-64,1-1,5-4");
+			
+			config.set("Kits.Names","Mage,Archer");
+			
+			new File(getDataFolder(), "RESET.FILE").createNewFile();
+		}
+	}
+}
