@@ -71,7 +71,7 @@ public class LOTR extends JavaPlugin{
 									String[] itemAmounts = s1.split("-");
 									ItemStack item = new ItemStack(
 											Integer.valueOf(itemAmounts[0]),
-											Integer.valueOf(itemAmounts[0]));
+											Integer.valueOf(itemAmounts[1]));
 									player.getInventory().addItem(item);
 									
 								
