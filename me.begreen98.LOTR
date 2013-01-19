@@ -52,7 +52,7 @@ public class LOTR extends JavaPlugin{
 							player.sendMessage("[" + ChatColor.AQUA + s
 									+ ChatColor.WHITE + "] " + ChatColor.GRAY
 									+ ": " + ChatColor.DARK_GRAY
-									+ "Adds you to the " + s + " Class!");
+									+ "Adds you to the " + ChatColor.AQUA + s + ChatColor.DARK_GRAY + " Class!");
 						}
 					}
 				} else {
@@ -97,10 +97,10 @@ public class LOTR extends JavaPlugin{
 							.split(",");
 					for(String dclasse: dclasses) {
 						if(dclasse != null){
-							player.sendMessage("[" + ChatColor.AQUA + dclasse
+							player.sendMessage("[" + ChatColor.GREEN + dclasse
 									+ ChatColor.WHITE + "] " + ChatColor.GRAY
 									+ ": " + ChatColor.DARK_GRAY
-									+ "Adds you to the " + dclasse + " Class!");
+									+ "Adds you to the " + ChatColor.GREEN + dclasse + ChatColor.DARK_GRAY + " Class!");
 						}
 					}
 				} else {
@@ -110,7 +110,7 @@ public class LOTR extends JavaPlugin{
 							player.getInventory().clear();
 							player.sendMessage(ChatColor.DARK_GRAY +
 									"You have been made the " +
-									ChatColor.AQUA + dclasses +
+									ChatColor.GREEN + dclasses +
 									ChatColor.DARK_GRAY + " class");
 							try{
 								String Items = getConfig().getString(
